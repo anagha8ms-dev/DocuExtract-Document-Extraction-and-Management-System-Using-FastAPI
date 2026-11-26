@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Documents | DocuExtract</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', path='style.css') }}">
+</head>
+
+<body class="my-documents-body">
+
+<div class="documents-container">
+
+    <!-- HEADER -->
+    <header class="documents-header">
+
+        <div>
+            <h1>My Documents</h1>
+            <p>Welcome, {{ username }}! Manage your uploaded documents.</p>
+        </div>
+
+        <a href="/dashboard" class="back-dashboard">
+            ← Back to Dashboard
+        </a>
+
+    </header>
+
+
+    <!-- UPLOAD BUTTON -->
+    <div class="documents-action">
+        <a href="/upload-page" class="documents-upload-btn">
+            + Upload New Document
+        </a>
+    </div>
+
+
+    <!-- DOCUMENT LIST -->
+    <section class="documents-section">
+
+        {% if message %}
+            <div class="upload-success">
+                {{ message }}
+            </div>
+        {% endif %}
+
+        <h2>Uploaded Documents</h2>
+
+        {% if documents %}
+
+        <div class="document-table-wrapper">
+
+            <table class="document-table">
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Filename</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Extraction</th>
+                        <th>Summary</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for doc in documents %}
+
+                                                            
+                                    
+                    <tr>
+                        
+                        <td>{{ doc.id }}</td>
+
+                        
+                        <td class="filename">
+                            📄 {{ doc.filename }}
+                        </td>
+
+                        
+                        <td>
+                            <span class="category-label">
+                                {{ doc.category }}
+                            </span>
+                        </td>
+
+                        
+                        <td>
+                            <span class="status-label">
+                                {{ doc.status }}
+                            </span>
+                        </td>
+
+                        
+                        <td>
+                            {% if doc.has_extracted_text %}
+
+                                <a href="/documents-page/{{ doc.id }}/extracted-text"
+                                   class="view-text-btn">
+                                    View Text
+                                </a>
+
+                            {% else %}
+
+                                <span class="not-available">
+                                    Not extracted
+                                </span>
+
+                            {% endif %}
+                        </td>
+
+                        
+                        <td>
+                            {% if doc.has_summary %}
+
+                                <span class="available">
+                                    Available
+                                </span>
+
+                            {% else %}
+
+                                <span class="not-available">
+                                    Not generated
+                                </span>
+
+                            {% endif %}
+                        </td>
+
+                        
+                        <td>
+                           {% if (doc.filename.lower().endswith('.pdf') or
+                                  doc.filename.lower().endswith('.jpg') or
+                                  doc.filename.lower().endswith('.jpeg') or
+                                  doc.filename.lower().endswith('.png'))
+                                  and not doc.has_extracted_text %}
+                                <form action="/documents-page/{{ doc.id }}/extract"
+                                    method="POST">
+
+                                    <button type="submit" class="extract-btn">
+                                        Extract Text
+                                    </button>
+
+                                </form>
+
+                            {% elif doc.has_extracted_text and not doc.has_summary %}
+
+                                <form action="/documents-page/{{ doc.id }}/summarize"
+                                    method="POST">
+
+                                    <button type="submit" class="summary-btn">
+                                        Generate Summary
+                                    </button>
+
+                                </form>
+
+                            {% elif doc.has_summary %}
+
+                                <a href="/documents-page/{{ doc.id }}/summary"
+                                   class="view-summary-btn">
+                                    View Summary
+                                </a>
+
+                            {% else %}
+
+                                <span class="not-available">
+                                    OCR required
+                                </span>
+
+                            {% endif %}
+                        </td>
+
+                    </tr>
+
+
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-documents">
+
+            <div class="empty-icon">📂</div>
+
+            <h3>No Documents Found</h3>
+
+            <p>You haven't uploaded any documents yet.</p>
+
+            <a href="/upload-page">
+                Upload Your First Document
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </section>
+
+</div>
+
+</body>
+</html>

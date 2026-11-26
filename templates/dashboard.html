@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | DocuExtract</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', path='style.css') }}">
+</head>
+
+<body class="dashboard-body">
+
+<div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <h2 class="logo">DocuExtract</h2>
+
+        <p class="menu-title">MENU</p>
+
+        <a href="/dashboard" class="active">Dashboard</a>
+        <a href="/documents-page">My Documents</a>
+        <a href="/upload-page">Upload Document</a>
+        <a href="/processing-history">Processing History</a>
+
+        <div class="sidebar-bottom">
+            <a href="/logout">Logout</a>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="dashboard-main">
+
+        <header class="dashboard-header">
+
+            <div>
+                <h1>Dashboard</h1>
+                <p>Welcome back, {{ username }}!</p>
+            </div>
+
+            <div class="user-profile">
+                {{ username }}
+            </div>
+
+        </header>
+
+
+        <!-- WELCOME SECTION -->
+        <section class="welcome-section">
+
+            <div>
+                <h2>Welcome to DocuExtract!</h2>
+
+                <p>
+                    Manage, extract, classify and summarize
+                    your documents easily.
+                </p>
+
+                <a href="/upload-page" class="primary-btn">
+                    + Upload Document
+                </a>
+            </div>
+
+        </section>
+
+
+       
+<!-- STATISTICS -->
+
+        <section class="stats-container">
+
+            <div class="stat-card">
+                <h3>Total Documents</h3>
+                <h1>{{ total_documents }}</h1>
+                <p>Uploaded documents</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Processed</h3>
+                <h1>{{ processed_documents }}</h1>
+                <p>Successfully processed</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Pending</h3>
+                <h1>{{ pending_documents }}</h1>
+                <p>Awaiting processing</p>
+            </div>
+
+        </section>
+
+        <!-- FEATURES -->
+        <section class="features-section">
+
+            <h2>Document Processing</h2>
+
+            <div class="features-container">
+
+                <div class="feature-card">
+                    <h3>📄 Text Extraction</h3>
+                    <p>
+                        Extract readable text from PDF documents.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>🏷️ Classification</h3>
+                    <p>
+                        Automatically classify documents
+                        into different categories.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>✨ AI Summarization</h3>
+                    <p>
+                        Generate meaningful summaries
+                        from extracted content.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer class="dashboard-footer">
+            © 2026 DocuExtract | Intelligent Document Processing System
+        </footer>
+
+    </main>
+
+</div>
+
+</body>
+</html>

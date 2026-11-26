@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Upload Document | DocuExtract</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', path='style.css') }}">
+</head>
+
+<body class="upload-body">
+
+<div class="upload-container">
+
+    <div class="upload-header">
+        <h1>DocuExtract</h1>
+        <a href="/dashboard">Back to Dashboard</a>
+    </div>
+
+    <div class="upload-card">
+
+        <h2>Upload Your Document</h2>
+
+        <p class="upload-description">
+            Upload your documents to extract, classify
+            and generate summaries.
+        </p>
+
+        {% if message %}
+            <div class="upload-success">
+                {{ message }}
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <div class="upload-error">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <form action="/upload-page"
+              method="POST"
+              enctype="multipart/form-data">
+
+            <div class="file-area">
+                <div class="upload-icon">📄</div>
+
+                <h3>Select Your Document</h3>
+
+                <p>PDF, JPG, JPEG or PNG</p>
+
+                <input type="file"
+                       name="file"
+                       accept=".pdf,.jpg,.jpeg,.png"
+                       required>
+            </div>
+
+            <p class="file-note">
+                Maximum file size: 10 MB
+            </p>
+
+            <button type="submit" class="upload-submit">
+                Upload Document
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

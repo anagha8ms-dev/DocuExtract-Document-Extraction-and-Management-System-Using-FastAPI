@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>View Summary | DocuExtract</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', path='style.css') }}">
+</head>
+
+<body class="summary-body">
+
+<div class="summary-container">
+
+    <header class="summary-header">
+
+        <div>
+            <h1>DocuExtract</h1>
+            <p>AI-Powered Document Summarization</p>
+        </div>
+
+        <a href="/documents-page">Back to My Documents</a>
+
+    </header>
+
+    <div class="summary-card">
+
+        <div class="summary-title">
+            <span>✨</span>
+            <h2>AI Generated Summary</h2>
+        </div>
+
+        <div class="document-info">
+
+            <p><strong>Document:</strong>
+                {{ document.filename }}
+            </p>
+
+            <p><strong>Category:</strong>
+                {{ document.category }}
+            </p>
+
+            <p><strong>Status:</strong>
+                {{ document.status }}
+            </p>
+
+        </div>
+
+        <hr>
+
+        <h3>Summary Content</h3>
+
+        <div class="summary-content">{{ summary }}</div>
+
+        <div class="summary-actions">
+
+            <a href="/documents-page" class="back-btn">
+                Back to Documents
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Register | DocuExtract</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', path='style.css') }}">
+</head>
+
+<body class="auth-page">
+
+<div class="auth-card">
+
+    <h1>Create Account</h1>
+    <p>Join DocuExtract today</p>
+
+    <form action="/register" method="POST">
+
+        <label>Username</label>
+        <input type="text" name="username"
+               placeholder="Enter Username" required>
+
+        <label>Email</label>
+        <input type="email" name="email"
+               placeholder="Enter Email" required>
+
+        <label>Password</label>
+        <input type="password" name="password"
+               placeholder="Create Password" required>
+
+        <button type="submit">Register</button>
+        <br>
+
+    </form>
+
+    <p>
+        <br>
+        Already have an account?
+        <a href="/login">Login</a>
+    </p>
+
+    <a href="/">Back to Home</a>
+
+</div>
+</body>
+</html>

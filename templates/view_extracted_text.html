@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Extracted Text | DocuExtract</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', path='style.css') }}">
+</head>
+
+<body class="summary-body">
+
+<div class="summary-container">
+
+    <header class="summary-header">
+
+        <div>
+            <h1>DocuExtract</h1>
+            <p>AI-Powered Document Processing</p>
+        </div>
+
+        <a href="/documents-page">
+            ← My Documents
+        </a>
+
+    </header>
+
+    <div class="summary-card">
+
+        <div class="summary-title">
+            <h2>📄 Extracted Document Text</h2>
+            <span class="summary-badge">
+                Extraction Complete
+            </span>
+        </div>
+
+        <div class="document-info">
+
+            <h3>Document Information</h3>
+
+            <p>
+                <strong>Document:</strong>
+                {{ document.filename }}
+            </p>
+
+            <p>
+                <strong>Category:</strong>
+                {{ document.category }}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                {{ document.status }}
+            </p>
+
+        </div>
+
+        <h3 class="content-heading">
+            Extracted Content
+        </h3>
+
+            <div class="summary-content">
+                {% if extracted_text and extracted_text.strip() %}
+                    <pre class="extracted-text">{{ extracted_text }}</pre>
+                {% else %}
+                    <p>No readable text found in this document.</p>
+                {% endif %}
+         </div>
+         
+        <div class="summary-footer">
+
+            <span>📄 Extracted using DocuExtract</span>
+
+            <a href="/documents-page" class="back-btn">
+                ← Back to My Documents
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

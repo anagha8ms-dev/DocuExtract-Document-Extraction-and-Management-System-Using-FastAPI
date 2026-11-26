@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Processing History | DocuExtract</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', path='style.css') }}">
+</head>
+
+<body class="activity-body">
+
+<div class="activity-container">
+
+    <!-- Header -->
+
+    <header class="activity-header">
+
+        <div>
+            <h1>DocuExtract</h1>
+            <p>AI-Powered Document Processing</p>
+        </div>
+
+        <a href="/dashboard" class="activity-back">
+            ← Back to Dashboard
+        </a>
+
+    </header>
+
+    <!-- Heading -->
+
+    <section class="activity-title">
+
+        <h2>Processing History</h2>
+
+        <p>
+            Welcome, {{ username }}!
+            Track your document processing activities.
+        </p>
+
+    </section>
+
+    <!-- Statistics -->
+
+    <section class="activity-stats">
+
+        <div class="activity-stat">
+            <h3>Total Activities</h3>
+            <h2>{{ total_activities }}</h2>
+        </div>
+
+        <div class="activity-stat">
+            <h3>Text Extractions</h3>
+            <h2>{{ extraction_count }}</h2>
+        </div>
+
+        <div class="activity-stat">
+            <h3>Summaries Generated</h3>
+            <h2>{{ summary_count }}</h2>
+        </div>
+
+    </section>
+
+    <!-- Timeline -->
+
+    <section class="activity-card">
+
+        <h2>Recent Activities</h2>
+
+        {% if activities %}
+
+        <div class="timeline">
+
+            {% for activity in activities %}
+
+            <div class="timeline-item">
+
+                <div class="timeline-icon">
+
+                    {% if activity.action == "Document Uploaded" %}
+                        ↑
+                    {% elif activity.action == "Text Extracted" %}
+                        ✓
+                    {% elif activity.action == "Summary Generated" %}
+                        ✨
+                    {% else %}
+                        •
+                    {% endif %}
+
+                </div>
+
+                <div class="timeline-content">
+
+                    <div class="timeline-top">
+
+                        <h3>{{ activity.action }}</h3>
+
+                        <span class="activity-badge">
+                            {{ activity.status }}
+                        </span>
+
+                    </div>
+
+                    <p class="timeline-filename">
+                        📄 {{ activity.filename }}
+                    </p>
+
+                    <p class="timeline-details">
+                        Document ID: {{ activity.document_id }}
+                    </p>
+
+                    <p class="timeline-date">
+
+                        {% if activity.created_at %}
+                            {{ activity.created_at.strftime(
+                                "%d %B %Y, %I:%M %p"
+                            ) }}
+                        {% else %}
+                            Date unavailable
+                        {% endif %}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="activity-empty">
+
+            <h3>No Activities Yet</h3>
+
+            <p>
+                Your document processing activities
+                will appear here.
+            </p>
+
+            <a href="/upload-page">
+                Upload Your First Document
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </section>
+
+</div>
+
+</body>
+</html>
